@@ -2,9 +2,15 @@
 
 Last updated: October 9, 2026.
 
-## Bottom line
+## Status
 
-Don't build another AI gateway, model router or token dashboard. That space is crowded and well funded. Build the layer that answers **"what did this AI outcome cost, where was the waste, and how do we pay less for it?"** Start as an open-source developer tool (the GitNexus playbook), then sell FinOps and finance features on the same data.
+Exploring. **No idea is locked.** Start from the problems in [challenges/ai-tokenomics-challenges.md](../challenges/ai-tokenomics-challenges.md) and validate them with interviews before choosing.
+
+## Working hypotheses (not decisions)
+
+- Avoid another AI gateway, model router or token dashboard. These are crowded and well funded.
+- A promising core question: **"What did this AI outcome cost, which business result did it move, where was the waste, and how do we get more value per dollar?"**
+- A promising starting move: an open-source developer tool (the GitNexus playbook), with finance and FinOps features layered on later.
 
 ## The GitNexus pattern to copy
 
@@ -76,7 +82,7 @@ Crowding ratings are judgment calls.
 | 21 | **AI seat rightsizing** | Downgrades or reassigns unused Cursor, Copilot, ChatGPT and Claude seats | High (1Password) — avoid |
 | 22 | **Learned per-workflow model routing** | Learns which steps can move to smaller models from a team's own traces | High (routers) — avoid |
 
-## Ranked shortlist
+## Current shortlist (provisional — re-rank after interviews)
 
 | Rank | Idea | Why |
 |---|---|---|
@@ -85,7 +91,7 @@ Crowding ratings are judgment calls.
 | 3 | **AI cost-per-outcome reporting (#10) + FOCUS-for-AI adapter (#9)** | The paid FinOps layer on profiler data. Builds on KostOps, the course and Tokenomics Foundation standards |
 | 4 | **AI commitment optimizer (#15)** | Best fit for your AWS and Savings Plans experience, with savings-share pricing. Higher sales effort, so it's a good second product |
 
-## Suggested sequence
+## Possible sequence (if the shortlist holds)
 
 1. **Months 0–3:** open-source agent cost profiler with a coding-agent mode (cost per merged PR). One command, real repo, prints "you wasted $X here."
 2. **Months 3–6:** FOCUS-for-AI export and cost-per-outcome showback for FinOps teams (paid team tier).
