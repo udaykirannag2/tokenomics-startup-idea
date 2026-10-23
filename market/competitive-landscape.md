@@ -8,21 +8,22 @@ Legend: ✅ stated on their site · ◐ partial or limited · — not stated (no
 
 1. **Our idea isn't a single-competitor problem.** At least four companies already show margin per customer: Paid.ai, Revenium, Amberflo and CloudZero. Each comes at it from a different side.
 2. **Paid.ai does attribute cost per customer and per agent, but only through its SDK.** Cost traces are tagged with a customer and product ID, and "cost-attributed signals" tie AI calls to agent actions ([Paid docs](https://docs.paid.ai/documentation/getting-started/cost-attributed-signals)). If a call isn't wrapped in Paid's tracing context, it's recorded with no customer attached ([Paid docs](https://docs.paid.ai/documentation/getting-started/cost-traces)). Its docs say nothing about shared infrastructure costs or reconciling to provider invoices.
-3. **Amberflo is the closest match we hadn't met.** It claims gateway connectors with no code changes, attribution down to customer, tenant, agent and workflow, margin per customer, and credit billing in one product ([Amberflo](https://amberflo.io/platform)).
-4. **Every tool starts from a different source of data:**
+3. **Ascerta (formerly Pay-i) is now well funded on the internal-enterprise side.** It measures true cost, including discounts and hidden fees, and ROI per use case for CIOs and CFOs, but not revenue per customer. See its profile.
+4. **Amberflo is the closest match we hadn't met.** It claims gateway connectors with no code changes, attribution down to customer, tenant, agent and workflow, margin per customer, and credit billing in one product ([Amberflo](https://amberflo.io/platform)).
+5. **Every tool starts from a different source of data:**
    - Gateways and observability tools start from requests.
    - Paid, Revenium and Stigg start from an SDK in the app.
    - CloudZero, Vantage and Finout start from the cloud bill.
    - Billing tools start from usage events.
 
    None of them clearly joins all four into one ledger the finance team signs off on.
-5. **Finance and ERP integration is weakest among the AI-economics tools.** The billing tools have it (Orb, Solvimon and Lago all integrate with NetSuite). The AI-cost tools mostly stop at a warehouse export or a dashboard.
+6. **Finance and ERP integration is weakest among the AI-economics tools.** The billing tools have it (Orb, Solvimon and Lago all integrate with NetSuite). The AI-cost tools mostly stop at a warehouse export or a dashboard.
 
 ## White space to validate
 
 | Gap | Why it may be open | Closest threat |
 |---|---|---|
-| AI gross margin per customer, reconciled to real invoices and committed discounts | Gateways price requests from list rates; Solo's own docs say spend is an estimate that may not match the invoice | CloudZero, Revenium |
+| AI gross margin per customer, reconciled to real invoices and committed discounts | Gateways price requests from list rates; Solo's own docs say spend is an estimate that may not match the invoice. Ascerta handles discounts and hidden fees, but for internal use cases, not customer margin | CloudZero, Revenium, Ascerta |
 | Allocating shared AI costs (GPUs, vector DBs, evaluations, embeddings) to tenants | SDK and gateway tools see calls, not shared infrastructure | CloudZero, Finout |
 | Credits ↔ cost ↔ revenue in one ledger for SaaS with existing billing (Stripe, Zuora, Chargebee) | Paid and Stigg want to own the billing or runtime; established SaaS companies won't replace billing | Amberflo, Stigg |
 | Finance-grade output: AI COGS posted to the GL, credit liability exposure, period close | AI-economics tools serve dashboards to engineering and product | Orb or Solvimon adding cost data |
@@ -33,6 +34,7 @@ Legend: ✅ stated on their site · ◐ partial or limited · — not stated (no
 |---|---|---|---|
 | 2026-10 | TrueFoundry, Solo.io, Revenium, Stigg | Met at AI conference; all show AI cost features | Conference |
 | 2026-10-23 | All | Initial landscape built | This page |
+| 2026-09-30 | Ascerta | Pay-i renamed Ascerta; $18M Series A led by Dell Technologies Capital; expanded from AI cost to enterprise AI value and ROI | [Ascerta press release](https://ascerta.com/resources/press/ascerta-raises-18m-series-a) |
 
 ## How the market is layered
 
@@ -40,7 +42,7 @@ Legend: ✅ stated on their site · ◐ partial or limited · — not stated (no
 |---|---|---|---|
 | AI gateways | What did each request cost, and can I cap it? | Platform engineering | TrueFoundry, Solo.io, Portkey, LiteLLM, Kong |
 | LLM observability | What happened in each call, and what did it cost? | AI engineers | Helicone, Langfuse |
-| AI economics | Is each customer, agent or workflow profitable or worth it? | Eng + product + finance | Revenium, Paid.ai, Amberflo, Pay-i |
+| AI economics | Is each customer, agent or workflow profitable or worth it? | Eng + product + finance | Revenium, Paid.ai, Amberflo, Ascerta (formerly Pay-i) |
 | Cloud FinOps extending to AI | Where did the cloud and AI bill go? | FinOps + finance | CloudZero, Vantage, Finout |
 | Monetization and billing | How do I charge for usage and credits, and book revenue? | Product, RevOps, finance | Stigg, Metronome, Orb, Solvimon, Lago, Flexprice |
 
@@ -60,7 +62,7 @@ Columns map to the idea: capture cost without code changes, attribute it per cus
 | Revenium | AI economics | Yes | ◐ SDK/API | ✅ | ✅ | ✅ | ◐ | ✅ | ◐ warehouse/ERP (Ent.) | ✅ billed vs metered | High |
 | Paid.ai | AI economics |  | — SDK required | ✅ | ✅ signals | ✅ | ✅ | ✅ value receipts | ◐ Xero, webhooks | — | High |
 | Amberflo | AI economics |  | ✅ gateway connectors | ✅ | ✅ | ✅ | ✅ | ◐ | ◐ rev rec workflows | — | High |
-| Pay-i | AI economics |  | n.a. | ◐ use case/team | ◐ | — | — | ✅ KPIs | ◐ CSV export | — | Medium |
+| Ascerta (formerly Pay-i) | AI economics |  | ◐ connectors to AI tools | — (internal use case, team, person) | ✅ per run | — | — | ✅ KPIs | — | ✅ discounts, hidden fees | High (internal) / Medium (SaaS margin) |
 | CloudZero | Cloud FinOps extending to AI |  | ✅ billing data | ✅ | ◐ | ✅ | — | ✅ | — | ✅ invoices | Medium-High |
 | Vantage | Cloud FinOps extending to AI |  | ✅ billing data | ✅ | — | ◐ unit costs | — | — | ◐ Ramp, warehouse | ◐ bill-based | Medium |
 | Finout | Cloud FinOps extending to AI |  | ✅ billing data | ✅ | — | ◐ unit costs | — | ◐ | — | ◐ bill-based | Medium |
@@ -219,19 +221,20 @@ Columns map to the idea: capture cost without code changes, attribute it per cus
 - **Threat to our idea:** High
 - **Sources:** [amberflo.io/platform](https://amberflo.io/platform), [amberflo.io/pricing](https://amberflo.io/pricing), [docs.amberflo.io](https://docs.amberflo.io/)
 
-#### Pay-i
+#### Ascerta (formerly Pay-i)
 
-- **What they do:** Pay-i provides tools to measure GenAI initiative costs and track assigned objectives, KPIs, and realized value, helping organizations assess which use cases to pursue or stop.
-- **Buyer:** Enterprise leaders, especially C-suite executives evaluating GenAI investment and returns.
-- **USP (their claim):** Pay-i claims to make GenAI use-case economics transparent by showing both granular costs and the business value achieved.
-- **Cost attribution:** Describes granular GenAI cost visibility and tracking cost by use case, model, and team. Reports can export saved-query data using selected pivots and fields. Collection method or instrumentation is not stated.
-- **Revenue and margin:** Connects use-case costs with measurable KPI improvements and generated value; per-customer revenue, margin, or profitability attribution is not stated.
-- **Credits and billing:** not stated
-- **Finance integration:** Custom Reports API exports saved-query results as CSV for external analytics workflows. ERP, accounting, CRM, billing, and revenue-recognition integrations are not stated.
-- **Outcome / ROI:** Supports assigning objectives to AI deployments and tracking achievement and realized value; describes aligning spend with business outcomes and measuring KPI impact.
-- **Pricing:** not stated
-- **Threat to our idea:** Medium
-- **Sources:** [docs.pay-i.com/docs/custom-reports](https://docs.pay-i.com/docs/custom-reports), [pay-i.com/blog/from-pocs-to-real-results-scaling-genai-with-measurable-impact](https://pay-i.com/blog/from-pocs-to-real-results-scaling-genai-with-measurable-impact), [pay-i.com/press/when-will-genai-finally-deliver-returns-on-investment](https://pay-i.com/press/when-will-genai-finally-deliver-returns-on-investment)
+- **What they do:** Enterprise AI Management. Atlas measures AI cost, value, adoption and ROI for each use case, from a single run up to the whole portfolio, and ties each one to a business KPI ([Ascerta Atlas](https://ascerta.com/product/atlas)). The company also sells Forge (coding-agent productivity) and Convoy (for companies that provision their own AI capacity) ([Ascerta press release](https://ascerta.com/resources/press/ascerta-raises-18m-series-a)).
+- **Buyer:** CIOs, CFOs and AI leaders at large enterprises measuring their own internal AI use, not SaaS companies selling AI to customers.
+- **USP (their claim):** The "true cost" of every agent, run by run, including hidden fees and enterprise discounts that other tools miss or average away; value tied to KPIs; a "Recover the spend producing nothing" view covering failed runs, duplicate use cases and shadow AI ([Ascerta Atlas](https://ascerta.com/product/atlas)).
+- **Cost attribution:** Rolls up cost by run, use case, team, business unit and enterprise, plus engagement by person and tool. Connects to homegrown apps, Microsoft Copilot, Amazon Bedrock AgentCore, Salesforce Agentforce, GitHub Copilot, Claude Code and Codex ([Ascerta press release](https://ascerta.com/resources/press/ascerta-raises-18m-series-a)).
+- **Revenue and margin:** Not stated. Value is measured as KPIs, dollars earned and time saved, not as revenue or margin per external customer.
+- **Credits and billing:** Not stated.
+- **Finance integration:** ERP and billing integrations not stated. The earlier Pay-i docs offered a CSV export of reports ([Pay-i docs](https://docs.pay-i.com/docs/custom-reports)).
+- **Outcome / ROI:** Core strength. Aligns each use case to KPIs and analyzes workflows against business objectives.
+- **Pricing:** Not stated.
+- **Funding:** $18M Series A led by Dell Technologies Capital (September 30, 2026), $22.9M raised in total; Bellevue, WA; founded by Microsoft veterans David Tepper, Doron Holan and Erik Winters ([Ascerta press release](https://ascerta.com/resources/press/ascerta-raises-18m-series-a)).
+- **Threat to our idea:** High if we target internal enterprise AI ROI. Medium for the SaaS-margin idea, since Ascerta doesn't map spend to customer revenue or credits. It does narrow our "seat-based tools and discounts" gap on the internal side.
+- **Sources:** [ascerta.com/product/atlas](https://ascerta.com/product/atlas), [ascerta.com/resources/press/ascerta-raises-18m-series-a](https://ascerta.com/resources/press/ascerta-raises-18m-series-a), [docs.pay-i.com/docs/custom-reports](https://docs.pay-i.com/docs/custom-reports)
 
 ### Layer 4 — Cloud FinOps extending to AI (bill-based allocation)
 
